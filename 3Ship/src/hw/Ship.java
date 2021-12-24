@@ -1,18 +1,25 @@
 package hw;
 
 public class Ship implements Runnable {
+	private boolean turn;
 	private int boxes;
 	private Port port;
-
-	public Ship() {
+	private String name;
+	
+	public Ship(boolean turn, int boxes, Port port, String name) {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Ship(int boxes, Port port) {
-		super();
+		this.turn = turn;
 		this.boxes = boxes;
 		this.port = port;
+		this.name = name;
+	}
+
+	public boolean getTurn() {
+		return turn;
+	}
+
+	public void setTurn(boolean turn) {
+		this.turn = turn;
 	}
 
 	public int getBoxes() {
@@ -31,10 +38,18 @@ public class Ship implements Runnable {
 		this.port = port;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Override
 	public void run() {
 		try {
-			port.unloadShip(this);
+			port.dockDistribution(this);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

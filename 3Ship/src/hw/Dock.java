@@ -1,38 +1,27 @@
 package hw;
 
 public class Dock {
-	private boolean isFree;
+	private int numOfDock;
 
-	public Dock() {
+	public Dock(int numOfDock) {
 		super();
-		// TODO Auto-generated constructor stub
+		this.numOfDock = numOfDock;
 	}
 
-	public Dock(boolean isFree) {
-		super();
-		this.isFree = isFree;
+	public int getNumOfDock() {
+		return numOfDock;
 	}
 
-	public boolean isFree() {
-		return isFree;
+	public void setNumOfDock(int numOfDock) {
+		this.numOfDock = numOfDock;
 	}
 
-	public void setFree(boolean isFree) {
-		this.isFree = isFree;
-	}
-
-	public synchronized void unloadShip(Ship ship) {
-		isFree = false;
-		for (int i = ship.getBoxes(); i >= 0; i--) {
-			ship.setBoxes(i);
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println(Thread.currentThread().getName() + " boxes = " + ship.getBoxes());
+	public synchronized void unloadShip(Ship ship) throws InterruptedException {
+		for (int i = 0; i < 10; i++) {
+			ship.setBoxes(10 - i);
+			System.out.println("Dock_¹" + numOfDock + ": " + ship.getName() + " boxes: " + ship.getBoxes());
+			Thread.sleep(500);
 		}
-		isFree = true;
+		System.out.println(ship.getName() + " completed unloading");
 	}
 }
